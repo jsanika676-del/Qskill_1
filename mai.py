@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+df = pd.read_csv("sales_data.csv")
+print(df)
+print(df.head())
+print(df.info())
+print(df.describe())
+avg_sales = df["Sales"].mean()
+print("Average Sales:", avg_sales)
+category_sales = df.groupby("Category")["Sales"].sum()
+
+category_sales.plot(kind="bar")
+plt.title("Total Sales by Category")
+plt.xlabel("Category")
+plt.ylabel("Sales")
+plt.show()
+plt.scatter(df["Advertising"], df["Sales"])
+plt.title("Advertising vs Sales")
+plt.xlabel("Advertising")
+plt.ylabel("Sales")
+plt.show()
+corr = df.corr(numeric_only=True)
+
+plt.imshow(corr, cmap="coolwarm")
+plt.colorbar()
+plt.xticks(range(len(corr.columns)), corr.columns, rotation=45)
+plt.yticks(range(len(corr.columns)), corr.columns)
+plt.title("Correlation Heatmap")
+plt.show()
